@@ -1,0 +1,27 @@
+<div *ngIf="hero">
+	<h2>{{hero.name | uppercase}} Edit</h2>
+	<div><span>id: </span>{{hero.id}}</div>
+	<div>
+		<p>Name:
+			<input [(ngModel)]="hero.name" placeholder="name"/>
+		</p>
+		<p>Birthday:
+			<input style="margin-left:10px; width: 50px;" min="1" max="31" type="number" [(ngModel)]="day" placeholder="day"/>
+			<input style="margin-left:10px; width: 50px;" min="1" max="12" type="number" [(ngModel)]="month" placeholder="month"/>
+			<input style="margin-left:10px; width: 60px;" min="1970" max="3000" type="number" [(ngModel)]="year" placeholder="year"/>
+		</p>
+		<div>
+			<p style="float:left; clear:right;" >Male</p><input style="width:15px; float:left; clear:right" [checked]="sex" (click)="onChangesSex(true)" type="radio" value="true" />
+			<p style="float:left; clear:right; margin-left: 20px" >Fmale</p><input style="width:15px" [checked]="!sex" (click)="onChangesSex(false)" type="radio" value="false" />
+		</div>
+		<p>Description: 
+			<input [(ngModel)]="hero.description" placeholder="name"/>
+		</p>
+		<div>
+			<p style="float:left; clear:right;" >Status Yes:</p><input style="width:15px; float:left; clear:right" [checked]="status" (click)="onChangesStatus(true)" type="radio" value="true" />
+			<p style="float:left; clear:right; margin-left: 20px" >Status No:</p><input style="width:15px" [checked]="!status" (click)="onChangesStatus(false)" type="radio" value="false" />
+		</div>
+	</div>
+	<button (click)="goBack()">go back</button>
+	<button (click)="save()">save</button>
+</div>

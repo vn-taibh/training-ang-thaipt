@@ -2,10 +2,12 @@
 	<h2>{{hero.name | uppercase}} Details</h2>
 	<div><span>id: </span>{{hero.id}}</div>
 	<div>
-		<label>name:
-		<input [(ngModel)]="hero.name" placeholder="name"/>
-		</label>
+		<p>Name: {{hero.name}}</p>
+		<p>Birthday: {{hero.birthday | date:"dd/MM/yyyy"}}</p>
+		<p>Sex: {{hero.sex | formatsexpipe}}</p>
+		<p>Description: {{hero.description}}</p>
+		<p>Status: {{hero.status | formatstatus }}</p>
 	</div>
 	<button (click)="goBack()">go back</button>
-	<button (click)="save()">save</button>
+	<a routerLink="/edit/{{hero.id}}" ><button >edit</button></a>
 </div>
