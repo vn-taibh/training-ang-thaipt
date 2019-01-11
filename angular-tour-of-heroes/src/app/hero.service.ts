@@ -12,11 +12,11 @@ const httpOptions = {
 
 @Injectable()
 export class HeroService {
- 
+
 	private heroesUrl = 'http://5c321fcafe034a001404dcb8.mockapi.io/api/v1/Heroes'; // URL to web api
  
 	constructor( private http: HttpClient ) { }
- 
+
 	/** GET heroes from the server */
 	getHeroes (): Observable<Hero[]> {
 		return this.http.get<Hero[]>(this.heroesUrl)
@@ -24,7 +24,7 @@ export class HeroService {
 				tap(_ => console.log('fetched heroes'))
 			);
 	}
- 
+
 	/** GET hero by id. Return `undefined` when id not found */
 	getHeroNo404<Data>(id: number): Observable<Hero> {
 		const url = `${this.heroesUrl}/?id=${id}`;
@@ -37,7 +37,7 @@ export class HeroService {
 				})
 			);
 	}
- 
+
 	/** GET hero by id. Will 404 if id not found */
 	getHero(id: number): Observable<Hero> {
 		const url = `${this.heroesUrl}/${id}`;
@@ -45,7 +45,7 @@ export class HeroService {
 			tap(_ => console.log(`fetched hero id=${id}`))
 		);
 	}
- 
+
 	/* GET heroes whose name contains search term */
 	searchHeroes(term: string): Observable<Hero[]> {
 		if (!term.trim()) {
@@ -58,23 +58,22 @@ export class HeroService {
 	}
  
 	//////// Save methods //////////
- 
+
 	/** POST: add a new hero to the server */
 	addHero (hero: Hero): Observable<Hero> {
 		return this.http.post<Hero>(this.heroesUrl, hero, httpOptions).pipe(
 			tap((hero: Hero) => console.log(`added hero w/ id=${hero.id}`))
 		);
 	}
- 
+
 	/** DELETE: delete the hero from the server */
 	deleteHero (id: number): Observable<Hero> {
 		const url = `${this.heroesUrl}/${id}`;
- 
 		return this.http.delete<Hero>(url, httpOptions).pipe(
 			tap(_ => console.log(`deleted hero id=${id}`))
 		);
 	}
- 
+
 	/** PUT: update the hero on the server */
 	updateHero (hero: Hero): Observable<any> {
 		const url = `${this.heroesUrl}/${hero.id}`;

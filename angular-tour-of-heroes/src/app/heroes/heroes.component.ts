@@ -36,6 +36,5 @@ export class HeroesComponent implements OnInit {
 						}, (err) => {
 							console.log('Add fail:' + err)
 						});
-			
 	}
 }
