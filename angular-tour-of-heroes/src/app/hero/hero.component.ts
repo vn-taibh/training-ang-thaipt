@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 import { Hero } from '../hero';
 import { HeroService } from '../hero.service';
@@ -11,16 +11,12 @@ import { HeroService } from '../hero.service';
 })
 export class HeroComponent {
 
-	@Input() heroes: Hero[] ;
+	@Input() oneHero: Hero[] ;
+	@Output() ondeletehero = new EventEmitter<Hero>();
 
 	constructor(private heroService: HeroService) { }
 
 	delete(hero: Hero): void {
-		this.heroes = this.heroes.filter(h => h !== hero);
-		this.heroService.deleteHero(hero.id)
-				.subscribe(() => {
-					}, (err) => {
-						console.log('Delete fail: ' + err)
-					});
+		this.ondeletehero.emit(hero);
 	}
 }

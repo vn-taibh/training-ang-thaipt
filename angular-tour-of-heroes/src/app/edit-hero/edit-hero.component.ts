@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
 import { Hero } from '../hero';
-import { HeroService }  from '../hero.service';
+import { HeroService } from '../hero.service';
 
 @Component({
 	selector: 'app-edit-hero',
@@ -18,8 +18,8 @@ export class EditHeroComponent implements OnInit {
 	day: number;
 	month: number;
 	year: number;
-	min: any = {'day' : 1,'month':1 ,'year': 1975};
-	max: any = {'day' : 31,'month':12 ,'year': 3000};
+	min: any = {'day': 1, 'month': 1, 'year': 1970};
+	max: any = {'day': 31, 'month': 12, 'year': 3000};
 
 	constructor(
 		private route: ActivatedRoute,
@@ -56,35 +56,35 @@ export class EditHeroComponent implements OnInit {
 			alert('Incorrect birthday format');
 		} else {
 			this.hero.birthday = this.getTimeBirthday();
-			this.heroService.updateHero(this.hero)
-					.subscribe(() => {
-								this.goBack()
-							}, (err) => {
-								console.log('Update fail: ' + err)
-							});
+			this.heroService.updateHero(this.hero).subscribe(() => {
+				console.log('Update Success hero id = ' + this.hero.id);
+				this.goBack()
+			}, (err) => {
+				console.log('Update fail: ' + err)
+			});
 		}
 	}
 
-	onChangesSex(dk: boolean): void {
-		this.sex = dk;
+	onChangesSex(value: boolean): void {
+		this.sex = value;
 	}
 
-	onChangesStatus(dk: boolean): void {
-		this.status = dk;
+	onChangesStatus(value: boolean): void {
+		this.status = value;
 	}
 
-	getDMY(date: number): void {
-		let a = new Date(date);
-		this.month = a.getMonth() + 1;
-		this.day = a.getDate();
-		this.year = a.getFullYear();
+	getDMY(birthday: number): void {
+		let date = new Date(birthday);
+		this.month = date.getMonth() + 1;
+		this.day = date.getDate();
+		this.year = date.getFullYear();
 	}
 
 	getTimeBirthday(): any {
-		let d = new Date();
-		d.setDate(this.day);
-		d.setMonth(this.month - 1);
-		d.setFullYear(this.year);
-		return d.getTime();
+		let date = new Date();
+		date.setDate(this.day);
+		date.setMonth(this.month - 1);
+		date.setFullYear(this.year);
+		return date.getTime();
 	}
 }

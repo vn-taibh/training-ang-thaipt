@@ -19,31 +19,21 @@ export class HeroService {
 
 	/** GET heroes from the server */
 	getHeroes (): Observable<Hero[]> {
-		return this.http.get<Hero[]>(this.heroesUrl)
-			.pipe(
-				tap(_ => console.log('fetched heroes'))
-			);
+		return this.http.get<Hero[]>(this.heroesUrl);
 	}
 
 	/** GET hero by id. Return `undefined` when id not found */
 	getHeroNo404<Data>(id: number): Observable<Hero> {
 		const url = `${this.heroesUrl}/?id=${id}`;
-		return this.http.get<Hero[]>(url)
-			.pipe(
-				map(heroes => heroes[0]), // returns a {0|1} element array
-				tap(h => {
-					const outcome = h ? `fetched` : `did not find`;
-					console.log(`${outcome} hero id=${id}`);
-				})
-			);
+		return this.http.get<Hero[]>(url).pipe(
+			map(heroes => heroes[0])
+		);
 	}
 
 	/** GET hero by id. Will 404 if id not found */
 	getHero(id: number): Observable<Hero> {
 		const url = `${this.heroesUrl}/${id}`;
-		return this.http.get<Hero>(url).pipe(
-			tap(_ => console.log(`fetched hero id=${id}`))
-		);
+		return this.http.get<Hero>(url);
 	}
 
 	/* GET heroes whose name contains search term */
@@ -52,33 +42,25 @@ export class HeroService {
 			// if not search term, return empty hero array.
 			return of([]);
 		}
-		return this.http.get<Hero[]>(`${this.heroesUrl}/?name=${term}`).pipe(
-			tap(_ => console.log(`found heroes matching "${term}"`))
-		);
+		return this.http.get<Hero[]>(`${this.heroesUrl}/?name=${term}`);
 	}
  
 	//////// Save methods //////////
 
 	/** POST: add a new hero to the server */
 	addHero (hero: Hero): Observable<Hero> {
-		return this.http.post<Hero>(this.heroesUrl, hero, httpOptions).pipe(
-			tap((hero: Hero) => console.log(`added hero w/ id=${hero.id}`))
-		);
+		return this.http.post<Hero>(this.heroesUrl, hero, httpOptions);
 	}
 
 	/** DELETE: delete the hero from the server */
 	deleteHero (id: number): Observable<Hero> {
 		const url = `${this.heroesUrl}/${id}`;
-		return this.http.delete<Hero>(url, httpOptions).pipe(
-			tap(_ => console.log(`deleted hero id=${id}`))
-		);
+		return this.http.delete<Hero>(url, httpOptions);
 	}
 
 	/** PUT: update the hero on the server */
 	updateHero (hero: Hero): Observable<any> {
 		const url = `${this.heroesUrl}/${hero.id}`;
-		return this.http.put(url, hero, httpOptions).pipe(
-			tap(_ => console.log(`updated hero id=${hero.id}`))
-		);
+		return this.http.put(url, hero, httpOptions);
 	}
 }

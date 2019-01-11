@@ -7,11 +7,12 @@ import { Router } from '@angular/router';
 })
 export class HandleHeroDirective {
 
-	constructor(private route: Router) { }
+	@Input() id: number;
 
-	@Input('appHandleHero') id: number;
+	constructor(private route: Router) {}
 
 	@HostListener('click') onclick() {
+		console.log(this.id);
 		this.route.navigateByUrl(`/detail/${this.id}`);
 	}
 }

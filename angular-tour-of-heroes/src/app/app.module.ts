@@ -14,6 +14,7 @@ import { FormatSexPipe } from './format.pipe';
 import { FormatStatusPipe } from './format.pipe';
 import { HandleHeroDirective } from './handle-hero.directive';
 import { HeroComponent } from './hero/hero.component';
+import { AddHeroComponent } from './add-hero/add-hero.component';
 
 @NgModule({
 	imports: [
@@ -32,7 +33,8 @@ import { HeroComponent } from './hero/hero.component';
 		FormatSexPipe,
 		FormatStatusPipe,
 		HandleHeroDirective,
-		HeroComponent
+		HeroComponent,
+		AddHeroComponent
 	],
 	bootstrap: [ AppComponent ]
 })
