@@ -1,15 +1,17 @@
 import { Directive, HostListener, Input } from '@angular/core';
 
+import { Router } from '@angular/router';
+
 @Directive({
 	selector: '[appHandleHero]'
 })
 export class HandleHeroDirective {
 
-	constructor() { }
+	constructor(private route: Router) { }
 
 	@Input('appHandleHero') id: number;
 
 	@HostListener('click') onclick() {
-		window.location.href = `/detail/${this.id}`;
+		this.route.navigateByUrl(`/detail/${this.id}`);
 	}
 }

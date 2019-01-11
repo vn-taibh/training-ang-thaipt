@@ -6,20 +6,20 @@
 			<input [(ngModel)]="hero.name" placeholder="name"/>
 		</p>
 		<p>Birthday:
-			<input style="margin-left:10px; width: 50px;" min="1" max="31" type="number" [(ngModel)]="day" placeholder="day"/>
-			<input style="margin-left:10px; width: 50px;" min="1" max="12" type="number" [(ngModel)]="month" placeholder="month"/>
-			<input style="margin-left:10px; width: 60px;" min="1970" max="3000" type="number" [(ngModel)]="year" placeholder="year"/>
+			<input class="input-birthday" [attr.min]="min.day" [attr.max]="max.day" type="number" [(ngModel)]="day" placeholder="day"/>
+			<input class="input-birthday" [attr.min]="min.month" [attr.max]="max.month" type="number" [(ngModel)]="month" placeholder="month"/>
+			<input class="input-birthday" [attr.min]="min.year" [attr.max]="max.year" type="number" [(ngModel)]="year" placeholder="year"/>
 		</p>
 		<div>
-			<p style="float:left; clear:right;" >Male</p><input style="width:15px; float:left; clear:right" [checked]="sex" (click)="onChangesSex(true)" type="radio" value="true" />
-			<p style="float:left; clear:right; margin-left: 20px" >Fmale</p><input style="width:15px" [checked]="!sex" (click)="onChangesSex(false)" type="radio" value="false" />
+			<p >Male</p><input class="input-true" [checked]="sex" (click)="onChangesSex(true)" type="radio" value="true" />
+			<p >Fmale</p><input class="input-false" [checked]="!sex" (click)="onChangesSex(false)" type="radio" value="false" />
 		</div>
 		<p>Description: 
 			<input [(ngModel)]="hero.description" placeholder="name"/>
 		</p>
 		<div>
-			<p style="float:left; clear:right;" >Status Yes:</p><input style="width:15px; float:left; clear:right" [checked]="status" (click)="onChangesStatus(true)" type="radio" value="true" />
-			<p style="float:left; clear:right; margin-left: 20px" >Status No:</p><input style="width:15px" [checked]="!status" (click)="onChangesStatus(false)" type="radio" value="false" />
+			<p >Status Yes:</p><input class="input-true" [checked]="status" (click)="onChangesStatus(true)" type="radio" value="true" />
+			<p >Status No:</p><input class="input-false" [checked]="!status" (click)="onChangesStatus(false)" type="radio" value="false" />
 		</div>
 	</div>
 	<button (click)="goBack()">go back</button>

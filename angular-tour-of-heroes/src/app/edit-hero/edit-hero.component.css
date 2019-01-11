@@ -28,3 +28,19 @@ button:disabled {
 	color: #ccc;
 	cursor: auto;
 }
+.input-birthday {
+	margin-left:10px; 
+	width: 50px;
+}
+div div div p {
+	float:left; 
+	clear:right;
+}
+.input-true {
+	width:15px; 
+	float:left; 
+	clear:right
+}
+.input-false {
+	width:15px;
+}

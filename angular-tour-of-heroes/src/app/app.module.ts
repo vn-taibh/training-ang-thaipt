@@ -9,11 +9,11 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { HeroDetailComponent } from './hero-detail/hero-detail.component';
 import { HeroesComponent } from './heroes/heroes.component';
 import { HeroSearchComponent } from './hero-search/hero-search.component';
-import { MessagesComponent } from './messages/messages.component';
 import { EditHeroComponent } from './edit-hero/edit-hero.component';
 import { FormatSexPipe } from './format.pipe';
 import { FormatStatusPipe } from './format.pipe';
 import { HandleHeroDirective } from './handle-hero.directive';
+import { HeroComponent } from './hero/hero.component';
 
 @NgModule({
 	imports: [
@@ -27,12 +27,12 @@ import { HandleHeroDirective } from './handle-hero.directive';
 		DashboardComponent,
 		HeroesComponent,
 		HeroDetailComponent,
-		MessagesComponent,
 		HeroSearchComponent,
 		EditHeroComponent,
 		FormatSexPipe,
 		FormatStatusPipe,
-		HandleHeroDirective
+		HandleHeroDirective,
+		HeroComponent
 	],
 	bootstrap: [ AppComponent ]
 })
