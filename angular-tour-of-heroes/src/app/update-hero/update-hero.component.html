@@ -1,0 +1,67 @@
+<div>
+	<h2>{{type | uppercase}} HERO</h2>
+	<div *ngIf="id" ><span>id: </span>{{id}}</div>
+	<div>
+		<p>Name:
+			<input [(ngModel)]="name" placeholder="name"/>
+		</p>
+		<p>Birthday:
+			<input class="input-birthday" 
+				[attr.min]="min.day" 
+				[attr.max]="max.day" 
+				type="number" 
+				[(ngModel)]="day" 
+				placeholder="day"
+			/>
+			<input class="input-birthday" 
+				[attr.min]="min.month" 
+				[attr.max]="max.month" 
+				type="number" 
+				[(ngModel)]="month" 
+				placeholder="month"
+			/>
+			<input class="input-birthday" 
+				[attr.min]="min.year" 
+				[attr.max]="max.year" 
+				type="number" 
+				[(ngModel)]="year" 
+				placeholder="year"
+			/>
+		</p>
+		<div>
+			<p>Male</p>
+			<input class="input-true" 
+				[checked]="sex" 
+				(click)="onChangesSex(true)" 
+				type="radio" 
+			/>
+			<p>Fmale</p>
+			<input class="input-false" 
+				[checked]="!sex" 
+				(click)="onChangesSex(false)" 
+				type="radio"
+			/>
+		</div>
+		<p>Description: 
+			<input [(ngModel)]="description" placeholder="name"/>
+		</p>
+		<div>
+			<p>Status Yes:</p>
+			<input class="input-true" 
+				[checked]="status" 
+				(click)="onChangesStatus(true)" 
+				type="radio"
+			/>
+			<p>Status No:</p>
+			<input class="input-false" 
+				[checked]="!status" 
+				(click)="onChangesStatus(false)" 
+				type="radio"
+			/>
+		</div>
+	</div>
+	<button (click)="goBack()">go back</button>
+	<button *ngIf="type === 'edit'" (click)="save()">Save</button>
+	<button *ngIf="type === 'add'" (click)="add()">Add</button>
+</div>
+

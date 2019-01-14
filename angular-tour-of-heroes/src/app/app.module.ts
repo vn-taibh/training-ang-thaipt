@@ -15,6 +15,7 @@ import { FormatStatusPipe } from './format.pipe';
 import { HandleHeroDirective } from './handle-hero.directive';
 import { HeroComponent } from './hero/hero.component';
 import { AddHeroComponent } from './add-hero/add-hero.component';
+import { UpdateHeroComponent } from './update-hero/update-hero.component';
 
 @NgModule({
 	imports: [
@@ -34,7 +35,8 @@ import { AddHeroComponent } from './add-hero/add-hero.component';
 		FormatStatusPipe,
 		HandleHeroDirective,
 		HeroComponent,
-		AddHeroComponent
+		AddHeroComponent,
+		UpdateHeroComponent
 	],
 	bootstrap: [ AppComponent ]
 })
