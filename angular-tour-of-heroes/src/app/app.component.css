@@ -16,6 +16,7 @@
 		display: inline-block;
 		background-color: #eee;
 		border-radius: 4px;
+		margin-left: 15px;
 	}
 	nav a:visited, a:link {
 		color: #607d8b;
@@ -27,3 +28,4 @@
 	nav a.active {
 		color: #039be5;
 	}
+
