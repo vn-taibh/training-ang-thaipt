@@ -1,9 +1,9 @@
-<div>
+<div *ngIf="hero">
 	<h2>{{type | uppercase}} HERO</h2>
-	<div *ngIf="id" ><span>id: </span>{{id}}</div>
+	<div *ngIf="type === 'edit'" ><span>id: </span>{{hero.id}}</div>
 	<div>
 		<p>Name:
-			<input [(ngModel)]="name" placeholder="name"/>
+			<input [(ngModel)]="hero.name" placeholder="name"/>
 		</p>
 		<p>Birthday:
 			<input class="input-birthday" 
@@ -31,37 +31,35 @@
 		<div>
 			<p>Male</p>
 			<input class="input-true" 
-				[checked]="sex" 
+				[checked]="hero.sex" 
 				(click)="onChangesSex(true)" 
 				type="radio" 
 			/>
 			<p>Fmale</p>
 			<input class="input-false" 
-				[checked]="!sex" 
+				[checked]="!hero.sex" 
 				(click)="onChangesSex(false)" 
 				type="radio"
 			/>
 		</div>
 		<p>Description: 
-			<input [(ngModel)]="description" placeholder="name"/>
+			<input [(ngModel)]="hero.description" placeholder="name"/>
 		</p>
 		<div>
 			<p>Status Yes:</p>
 			<input class="input-true" 
-				[checked]="status" 
+				[checked]="hero.status" 
 				(click)="onChangesStatus(true)" 
 				type="radio"
 			/>
 			<p>Status No:</p>
 			<input class="input-false" 
-				[checked]="!status" 
+				[checked]="!hero.status" 
 				(click)="onChangesStatus(false)" 
 				type="radio"
 			/>
 		</div>
 	</div>
 	<button (click)="goBack()">go back</button>
-	<button *ngIf="type === 'edit'" (click)="save()">Save</button>
-	<button *ngIf="type === 'add'" (click)="add()">Add</button>
+	<button (click)="save()">Save</button>
 </div>
-

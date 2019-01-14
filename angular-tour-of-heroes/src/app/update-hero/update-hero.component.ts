@@ -6,7 +6,6 @@ import { Subscription } from 'rxjs';
 
 import { Hero } from '../hero';
 import { HeroService } from '../hero.service';
-import { Tree } from '@angular/router/src/utils/tree';
 
 @Component({
 	selector: 'app-update-hero',
@@ -14,16 +13,11 @@ import { Tree } from '@angular/router/src/utils/tree';
 	styleUrls: ['./update-hero.component.css'],
 	providers: [HeroService]
 })
-export class UpdateHeroComponent implements OnInit {
+export class UpdateHeroComponent implements OnInit, OnDestroy {
 
 	type: string;
 	hero: Hero;
 	subscription: Subscription;
-	id: number;
-	name:string;
-	sex: boolean;
-	status: boolean;
-	description: string;
 	day: number = 1;
 	month: number = 1;
 	year: number = 1970;
@@ -35,16 +29,20 @@ export class UpdateHeroComponent implements OnInit {
 		private heroService: HeroService,
 		private location: Location,
 		private router : Router
-	) {
-		this.type = this.route.snapshot.paramMap.get('type');
-	}
+	) {}
 
 	ngOnInit() {
+		this.type = this.route.snapshot.paramMap.get('type');
 		if(this.type === 'edit') {
 			this.getHero();
 		}
 		else {
 			this.type = 'add';
+			this.hero = new Hero();
+			this.hero.name = '';
+			this.hero.description = '';
+			this.hero.sex = false;
+			this.hero.status = false;
 		}
 	}
 
@@ -52,11 +50,6 @@ export class UpdateHeroComponent implements OnInit {
 		const id = +this.route.snapshot.paramMap.get('id');
 		this.subscription = this.heroService.getHero(id).subscribe((hero: Hero) => {
 			this.hero = hero;
-			this.id = this.hero.id;
-			this.name = this.hero.name;
-			this.sex = this.hero.sex;
-			this.status = this.hero.status;
-			this.description = this.hero.description;
 			this.getDMY(this.hero.birthday);
 		}, (err) => {
 			console.log(err)
@@ -71,28 +64,8 @@ export class UpdateHeroComponent implements OnInit {
 	}
 
 	save(): void {
-		if (this.day > 31 || this.day < 0) {
-			alert('Incorrect birthday format');
-		} else if (this.month > 12 || this.month < 0) {
-			alert('Incorrect birthday format');
-		} else {
-			this.hero.sex = this.sex;
-			this.hero.status = this.status;
-			this.hero.name = this.name;
-			this.hero.description = this.description;
-			this.hero.birthday = this.getTimeBirthday();
-			this.heroService.updateHero(this.hero).subscribe(() => {
-				console.log('Update Success hero id = ' + this.hero.id);
-				this.goBack()
-			}, (err) => {
-				console.log('Update fail: ' + err)
-			});
-		}
-	}
-
-	add(): void {
-		this.name = this.name.trim();
-		if (!this.name) { return; }
+		this.hero.name = this.hero.name.trim();
+		if (this.hero.name === '') { return; }
 		if (this.day > 31 || this.day < 0) {
 			alert('Incorrect day format');
 		} else if (this.month > 12 || this.month < 0) {
@@ -100,22 +73,23 @@ export class UpdateHeroComponent implements OnInit {
 		} else if (this.year < 0) {
 			alert('Incorrect year format');
 		} else {
-			let id: number;
-			let birthday: number = this.getTimeBirthday();
-			let hero: Hero = {
-				'id': id ,
-				'name': this.name, 
-				"birthday": birthday, 
-				'sex': this.sex, 
-				'description': this.description, 
-				'status': this.status
-			};
-			this.heroService.addHero(hero).subscribe(() => {
-				console.log('Add Success hero');
-				this.router.navigateByUrl('/heroes');
-			}, (err) => {
-				console.log('Add fail: ' + err)
-			});
+			this.hero.birthday = this.getTimeBirthday();
+			if(this.type === 'edit') {
+				this.heroService.updateHero(this.hero).subscribe(() => {
+					console.log('Update Success hero id = ' + this.hero.id);
+					this.goBack()
+				}, (err) => {
+					console.log('Update fail: ' + err)
+				});
+			}
+			else {
+				this.heroService.addHero(this.hero).subscribe(() => {
+					console.log('Add Success hero');
+					this.router.navigateByUrl('/heroes');
+				}, (err) => {
+					console.log('Add fail: ' + err)
+				});
+			}
 		}
 	}
 
@@ -132,11 +106,11 @@ export class UpdateHeroComponent implements OnInit {
 	}
 
 	onChangesSex(value: boolean): void {
-		this.sex = value;
+		this.hero.sex = value;
 	}
 
 	onChangesStatus(value: boolean): void {
-		this.status = value;
+		this.hero.status = value;
 	}
 
 	ngOnDestroy(): void {
@@ -144,5 +118,4 @@ export class UpdateHeroComponent implements OnInit {
 			this.subscription.unsubscribe();
 		}
 	}
-
 }
