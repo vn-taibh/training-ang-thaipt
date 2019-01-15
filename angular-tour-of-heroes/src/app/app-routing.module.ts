@@ -9,10 +9,10 @@ import { UpdateHeroComponent } from './update-hero/update-hero.component';
 const routes: Routes = [
 	{ path: '', redirectTo: '/dashboard', pathMatch: 'full' },
 	{ path: 'dashboard', component: DashboardComponent },
-	{ path: 'heroes/:id', component: HeroDetailComponent },
+	{ path: 'hero/new', component: UpdateHeroComponent },
+	{ path: 'hero/:id', component: HeroDetailComponent },
 	{ path: 'heroes', component: HeroesComponent },
-	{ path: 'hero/:id/edit', component: UpdateHeroComponent },
-	{ path: 'hero/new', component: UpdateHeroComponent }
+	{ path: 'hero/:id/edit', component: UpdateHeroComponent }
 ];
 
 @NgModule({

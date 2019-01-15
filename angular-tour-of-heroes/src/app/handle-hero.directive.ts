@@ -13,6 +13,6 @@ export class HandleHeroDirective {
 
 	@HostListener('click') onclick() {
 		console.log(this.id);
-		this.route.navigateByUrl(`/heroes/${this.id}`);
+		this.route.navigateByUrl(`/hero/${this.id}`);
 	}
 }
