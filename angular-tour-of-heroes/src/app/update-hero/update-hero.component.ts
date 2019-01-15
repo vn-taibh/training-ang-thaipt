@@ -32,9 +32,9 @@ export class UpdateHeroComponent implements OnInit, OnDestroy {
 	) {}
 
 	ngOnInit() {
-		this.type = this.route.snapshot.paramMap.get('type');
-		if(this.type === 'edit') {
+		if(this.route.snapshot.paramMap.get('id')) {
 			this.getHero();
+			this.type = 'edit';
 		}
 		else {
 			this.type = 'add';

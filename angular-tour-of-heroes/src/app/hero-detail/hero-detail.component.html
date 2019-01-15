@@ -9,5 +9,5 @@
 		<p>Status: {{hero.status | formatstatus }}</p>
 	</div>
 	<button (click)="goBack()">go back</button>
-	<a routerLink="/update/edit/{{hero.id}}" ><button >edit</button></a>
+	<a routerLink="/hero/{{hero.id}}/edit" ><button >edit</button></a>
 </div>
