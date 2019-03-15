@@ -14,7 +14,6 @@ import { HeroService } from '../hero.service';
 	providers: [HeroService]
 })
 export class UpdateHeroComponent implements OnInit, OnDestroy {
-
 	type: string;
 	hero: Hero;
 	subscription: Subscription;
@@ -35,8 +34,7 @@ export class UpdateHeroComponent implements OnInit, OnDestroy {
 		if(this.route.snapshot.paramMap.get('id')) {
 			this.getHero();
 			this.type = 'edit';
-		}
-		else {
+		} else {
 			this.type = 'add';
 			this.hero = new Hero();
 			this.hero.name = '';
@@ -47,7 +45,7 @@ export class UpdateHeroComponent implements OnInit, OnDestroy {
 	}
 
 	getHero(): void {
-		const id = +this.route.snapshot.paramMap.get('id');
+		let id = +this.route.snapshot.paramMap.get('id');
 		this.subscription = this.heroService.getHero(id).subscribe((hero: Hero) => {
 			this.hero = hero;
 			this.getDMY(this.hero.birthday);
@@ -65,8 +63,9 @@ export class UpdateHeroComponent implements OnInit, OnDestroy {
 
 	save(): void {
 		this.hero.name = this.hero.name.trim();
-		if (this.hero.name === '') { return; }
-		if (this.day > 31 || this.day < 0) {
+		if (this.hero.name === '') {
+			return;
+		} if (this.day > 31 || this.day < 0) {
 			alert('Incorrect day format');
 		} else if (this.month > 12 || this.month < 0) {
 			alert('Incorrect month format');
@@ -74,7 +73,7 @@ export class UpdateHeroComponent implements OnInit, OnDestroy {
 			alert('Incorrect year format');
 		} else {
 			this.hero.birthday = this.getTimeBirthday();
-			if(this.type === 'edit') {
+			if(this.hero.id) {
 				this.heroService.updateHero(this.hero).subscribe(() => {
 					console.log('Update Success hero id = ' + this.hero.id);
 					this.goBack()
