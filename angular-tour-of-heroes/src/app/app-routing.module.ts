@@ -4,16 +4,15 @@ import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HeroesComponent } from './heroes/heroes.component';
 import { HeroDetailComponent } from './hero-detail/hero-detail.component';
-import { EditHeroComponent } from './edit-hero/edit-hero.component';
-import { AddHeroComponent } from './add-hero/add-hero.component';
+import { UpdateHeroComponent } from './update-hero/update-hero.component';
 
 const routes: Routes = [
 	{ path: '', redirectTo: '/dashboard', pathMatch: 'full' },
 	{ path: 'dashboard', component: DashboardComponent },
-	{ path: 'detail/:id', component: HeroDetailComponent },
-	{ path: 'edit/:id', component: EditHeroComponent },
+	{ path: 'hero/new', component: UpdateHeroComponent },
+	{ path: 'hero/:id', component: HeroDetailComponent },
 	{ path: 'heroes', component: HeroesComponent },
-	{ path: 'add', component: AddHeroComponent }
+	{ path: 'hero/:id/edit', component: UpdateHeroComponent }
 ];
 
 @NgModule({

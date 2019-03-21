@@ -1,6 +1,6 @@
 <div *ngIf="hero">
-	<h2>{{hero.name | uppercase}} Edit</h2>
-	<div><span>id: </span>{{hero.id}}</div>
+	<h2>{{type | uppercase}} HERO</h2>
+	<div *ngIf="type === 'edit'" ><span>id: </span>{{hero.id}}</div>
 	<div>
 		<p>Name:
 			<input [(ngModel)]="hero.name" placeholder="name"/>
@@ -31,13 +31,13 @@
 		<div>
 			<p>Male</p>
 			<input class="input-true" 
-				[checked]="sex" 
+				[checked]="hero.sex" 
 				(click)="onChangesSex(true)" 
 				type="radio" 
 			/>
 			<p>Fmale</p>
 			<input class="input-false" 
-				[checked]="!sex" 
+				[checked]="!hero.sex" 
 				(click)="onChangesSex(false)" 
 				type="radio"
 			/>
@@ -48,18 +48,18 @@
 		<div>
 			<p>Status Yes:</p>
 			<input class="input-true" 
-				[checked]="status" 
+				[checked]="hero.status" 
 				(click)="onChangesStatus(true)" 
 				type="radio"
 			/>
 			<p>Status No:</p>
 			<input class="input-false" 
-				[checked]="!status" 
+				[checked]="!hero.status" 
 				(click)="onChangesStatus(false)" 
 				type="radio"
 			/>
 		</div>
 	</div>
 	<button (click)="goBack()">go back</button>
-	<button (click)="save()">save</button>
+	<button (click)="save()">Save</button>
 </div>
